@@ -1,0 +1,60 @@
+<div class="user-form">
+  <mat-card class="user-form__box">
+    <img
+      class="user-form__img"
+      src="https://valueadd.pl//themes/contrib/valueadd/assets/img/valueadd-logo.png"
+    />
+    <form [formGroup]="registerForm" (ngSubmit)="submit()">
+      <mat-card-content>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Username" formControlName="userName" />
+          <mat-error
+            *ngIf="
+              registerForm.get('userName').hasError('required') &&
+              registerForm.get('userName').touched
+            "
+          >
+            This field is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="email" matInput placeholder="Email" formControlName="email" />
+          <mat-error
+            *ngIf="
+              registerForm.get('email').hasError('required') && registerForm.get('email').touched
+            "
+          >
+            This field is required
+          </mat-error>
+          <mat-error
+            *ngIf="registerForm.get('email').hasError('email') && registerForm.get('email').touched"
+          >
+            Invalid email format.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="password" matInput placeholder="Password" formControlName="password" />
+          <mat-error
+            *ngIf="
+              registerForm.get('email').hasError('required') && registerForm.get('email').touched
+            "
+          >
+            This field is required
+          </mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions class="user-form__bottom">
+        <div class="user-form__remember">
+          <mat-icon aria-hidden="false" aria-label="Example home icon" class="user-form__icon"
+          >check_box</mat-icon
+          >
+          <span>Remember</span>
+        </div>
+        <button mat-flat-button class="user-form__btn" type="submit">Sing up</button>
+      </mat-card-actions>
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+    </form>
+  </mat-card>
+</div>

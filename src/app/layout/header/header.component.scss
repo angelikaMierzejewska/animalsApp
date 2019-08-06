@@ -1,0 +1,26 @@
+.menu-spacer {
+  flex: 1 1 auto;
+}
+.navbar--mobile {
+  display: block;
+
+  @media screen and (min-width: 992px) {
+    display: none;
+  }
+}
+
+.navbar--web {
+  display: none;
+  @media screen and (min-width: 992px) {
+    display: block;
+  }
+}
+
+mat-toolbar-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-drawer-container {
+  background: white;
+}

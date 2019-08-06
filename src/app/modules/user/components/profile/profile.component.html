@@ -1,0 +1,23 @@
+<div class="my-profile">
+  <div *ngIf="user">
+    <div class="info__box">
+      <div>
+        <p>{{ user.userName }}</p>
+        <p>{{ user.email }}</p>
+      </div>
+      <div>
+        <button mat-flat-button color="primary" (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </div>
+
+    <!--  <app-animal-table [animals]="dogs"></app-animal-table>-->
+  </div>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+  <div *ngIf="this.animals && this.animals.length > 0">
+    <h2>Your animals</h2>
+    <app-animal-table [animals]="this.animals"></app-animal-table>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="side-nav">
+  <mat-sidenav-container fullscreen>
+    <mat-sidenav
+      #sidenav
+      mode="side"
+      class="example-sidenav"
+      [ngStyle]="{ 'width.em': sidenavWidth }"
+      opened="true"
+    >
+      <mat-nav-list *ngFor="let item of sideNav">
+        <mat-list-item routerLink="{{ item.url }}" routerLinkActive="active">
+          <mat-icon mat-list-icon>person</mat-icon>
+          <div fxFlex="10"></div>
+          <div *ngIf="sidenavWidth > 6" class="sidenav-item">
+            <h5 class="lead">{{ item.name }}</h5>
+          </div>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <div class="example-sidenav-content">
+      <mat-icon (click)="sidenav.toggle()" class="sidenav-menu">menu</mat-icon>
+
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-container>
+</div>

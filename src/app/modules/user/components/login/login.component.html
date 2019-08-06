@@ -1,0 +1,46 @@
+<div class="user-form">
+  <mat-card class="user-form__box" [ngClass]="{ 'login__box--height': isLoading }">
+    <img class="user-form__img" src="https://valueadd.pl//themes/contrib/valueadd/assets/img/valueadd-logo.png" />
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
+      <mat-card-content>
+        <mat-form-field>
+          <mat-icon *ngIf="loginForm.get('email').valid" matSuffix class="user-form__icon login__icon--done">done</mat-icon>
+          <mat-icon
+            *ngIf="(loginForm.get('email').hasError('required') && loginForm.get('email').touched) || loginForm.get('email').hasError('email')"
+            matSuffix
+            class="user-form__icon--error"
+          >
+            clear
+          </mat-icon>
+          <input type="email" matInput placeholder="Email" formControlName="email" />
+          <mat-error *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched">
+            This field is required
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('email').hasError('email') && loginForm.get('email').touched">
+            Invalid email format.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-icon *ngIf="loginForm.get('password').valid" matSuffix class="user-form__icon login__icon--done">done</mat-icon>
+          <mat-icon *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched" matSuffix class="user-form__icon--error">
+            clear
+          </mat-icon>
+          <input type="password" matInput placeholder="Password" formControlName="password" />
+          <mat-error *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">
+            This field is required
+          </mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions class="user-form__bottom">
+        <div class="user-form__remember">
+          <mat-icon aria-hidden="false" aria-label="Example home icon" class="user-form__icon">check_box</mat-icon>
+          <span>Remember</span>
+        </div>
+        <button mat-flat-button class="user-form__btn" type="submit">Sing up</button>
+      </mat-card-actions>
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+    </form>
+  </mat-card>
+</div>
+

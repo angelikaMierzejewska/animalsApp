@@ -1,0 +1,73 @@
+<div class="dog-form__box">
+  <div *ngIf="this.animal">
+    <mat-icon (click)="editAnimal()">create</mat-icon>
+  </div>
+
+  <div *ngIf="!showEditForm">
+    <p>{{ this.animal.name }}</p>
+    <p>{{ this.animal.breed }}</p>
+    <p *ngIf="this.animal.subBreed">{{ this.animal.subBreed }}</p>
+    <p>{{ users[this.animal.owner - 1].userName }}</p>
+    <img src="{{ this.animal.url }}" height="100px" />
+    <div>
+      <button
+        mat-raised-button
+        color="primary"
+        matBadge="{{ this.badgeAction }}"
+        matBadgePosition="before"
+        matBadgeColor="accent"
+        (click)="animalAction()"
+      >
+        Action {{ this.animal.action }}
+      </button>
+    </div>
+
+    <button mat-raised-button color="primary" class="next-day__button" (click)="nextDay()">
+      Next day
+    </button>
+  </div>
+
+  <form [formGroup]="animalForm" (ngSubmit)="submit()">
+    <mat-card-content>
+      <mat-form-field *ngIf="showEditForm">
+        <input formControlName="name" type="text" matInput id="name" />
+        <mat-error
+          *ngIf="animalForm.get('name').hasError('required') && animalForm.get('name').touched"
+        >
+          This field is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="showEditForm">
+        <mat-select
+          formControlName="breed"
+          id="Breed"
+          placeholder="Breed"
+          (selectionChange)="changeBreed()"
+        >
+          <mat-option *ngFor="let breed of breeds" [value]="breed">
+            {{ breed }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="showEditForm && subBreeds.length > 0">
+        <mat-select formControlName="subBreed" id="subBreed" placeholder="Sub Breed">
+          <mat-option *ngFor="let subBreed of subBreeds" [value]="subBreed">
+            {{ subBreed }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="showEditForm">
+        <mat-select formControlName="owner" id="users" placeholder="User">
+          <mat-option *ngFor="let user of users; let i = index" [value]="user.id">
+            {{ user.userName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button type="submit">Create</button>
+    </mat-card-actions>
+  </form>
+</div>
